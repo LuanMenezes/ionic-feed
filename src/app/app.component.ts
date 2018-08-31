@@ -26,7 +26,6 @@ export class MyApp {
       if(config == null){
         configProvider.setConfigData(false);
       } else {
-      	console.log("TESTE");
         this.rootPage = TabsPage;
       }
       

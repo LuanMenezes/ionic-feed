@@ -14,6 +14,7 @@ import { IntroPageModule } from "../pages/intro/intro.module";
 import { HttpClientModule } from "@angular/common/http";
 import {ConfigPageModule} from "../pages/config/config.module";
 import {ProfilePageModule} from "../pages/profile/profile.module";
+import {FeedDetailPageModule} from "../pages/feed-detail/feed-detail.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {ProfilePageModule} from "../pages/profile/profile.module";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    FeedDetailPageModule,
     FeedPageModule,
     IntroPageModule,
     HttpClientModule,

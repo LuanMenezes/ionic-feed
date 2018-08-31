@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {MovieProvider} from "../../providers/movie/movie";
+import {FeedDetailPage} from "../feed-detail/feed-detail";
 
 @IonicPage()
 @Component({
@@ -15,6 +16,9 @@ export class FeedPage {
 	private loader: any;
 	private refresher: any;
 	private isRefresher: boolean = false;
+
+	private page: number = 1;
+	private infiniteScroll;
 	
 	constructor(
 			public navCtrl: NavController,
@@ -43,11 +47,22 @@ export class FeedPage {
 		this.getMovies();
 	}
 	
-	getMovies(){
-		this.movies = [];
-		this.movieProvider.getMovies().subscribe(
+	doInfinite(infinite){
+		this.page++;
+		this.infiniteScroll = infinite;
+		this.getMovies(true);
+	}
+	
+	getMovies(newpage:boolean = false){
+		this.movieProvider.getMovies(this.page).subscribe(
 		(data) => {
-			this.movies = (data as any).results;
+			let results = (data as any).results;
+			if(newpage){
+				this.movies = this.movies.concat(results)
+				this.infiniteScroll.complete();
+			}else{
+				this.movies = results;
+			}
 			this.closing();
 			if(this.isRefresher){
 				this.refresher.complete();
@@ -62,6 +77,10 @@ export class FeedPage {
 				this.isRefresher = false;
 			}
 		});
+	}
+	
+	detail(id){
+		this.navCtrl.push(FeedDetailPage, {id: id});
 	}
 	
 	ionViewDidEnter() {

@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Platform} from "ionic-angular";
 
 /**
  * INJECTABLE é pq vai ser inserido via INJEÇÃO DE DEPENDENCIA
@@ -7,23 +8,30 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class MovieProvider {
-  private baseApiUrl = "https://api.themoviedb.org/3/movie/";
-  
-  constructor(public http: HttpClient) {
-    console.log('Hello MovieProvider Provider');
-  }
-
-  getLatesMovie(){
-    let url = this.baseApiUrl + "latest?api_key=" + this.getApiKey() +"&language=pt-BR";
-    return this.http.get(url);
-  }
+	private baseApiUrl = "/themoviedbapi";
 	
-	getMovies(){
-		let url = this.baseApiUrl + "popular?api_key=" + this.getApiKey() +"&language=pt-BR";
+	constructor(public http: HttpClient, private _platform: Platform) {
+		if(this._platform.is("cordova")){
+			this.baseApiUrl = "https://api.themoviedb.org/3/movie";
+		}
+	}
+	
+	getLatesMovie() {
+		let url = this.baseApiUrl + "/latest?api_key=" + this.getApiKey() + "&language=pt-BR";
 		return this.http.get(url);
 	}
 	
-	getApiKey():string{
-  	    return "3d7aa99463bfea0007796cc0403f92b1";
+	getMovies(page = 1) {
+		let url = this.baseApiUrl + "/popular?api_key=" + this.getApiKey() + "&language=pt-BR&page="+page;
+		return this.http.get(url);
+	}
+	
+	getMovieDetail(id) {
+		let url = this.baseApiUrl + "/" + id +"?api_key=" + this.getApiKey() + "&language=pt-BR";
+		return this.http.get(url);
+	}
+	
+	getApiKey(): string {
+		return "3d7aa99463bfea0007796cc0403f92b1";
 	}
 }
