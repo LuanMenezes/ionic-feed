@@ -18,4 +18,9 @@ export class MovieProvider {
     let url = this.baseApiUrl + "latest?api_key=" + this.apiKey +"&language=pt-BR";
     return this.http.get(url);
   }
+	
+	getMovies(){
+		let url = this.baseApiUrl + "popular?api_key=" + this.apiKey +"&language=pt-BR";
+		return this.http.get(url);
+	}
 }

@@ -11,15 +11,7 @@ import {MovieProvider} from "../../providers/movie/movie";
 	]
 })
 export class FeedPage {
-	private feed: object = {
-		title: "Luan Menezes",
-		date: "5 de Novembro",
-		description: "Descrição do Feed",
-		likes: 12,
-		comments: 5,
-		avatar: "assets/imgs/avatar.png",
-		banner: "assets/imgs/bg-card.jpg"
-	};
+	private movies = new Array<any>();
 	
 	constructor(
 			public navCtrl: NavController,
@@ -28,13 +20,23 @@ export class FeedPage {
 	) {}
 	
 	ionViewDidLoad() {
-		this.movieProvider.getLatesMovies().subscribe(
-			(data) =>{
-				console.log(data);
-			},
-			(error) => {
-				console.error(error);
-			}
+		// this.movieProvider.getLatesMovies().subscribe(
+		// 	(data) =>{
+		// 		console.log(data);
+		// 	},
+		// 	(error) => {
+		// 		console.error(error);
+		// 	}
+		// );
+		
+		this.movieProvider.getMovies().subscribe(
+				(data) =>{
+					this.movies = (data as any).results;
+					console.log(this.movies);
+				},
+				(error) => {
+					console.error(error);
+				}
 		);
 	}
 }

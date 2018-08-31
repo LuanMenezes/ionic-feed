@@ -6,34 +6,34 @@
 
 </ion-header>
 
-<ion-content padding>
-	<ion-card>
+<ion-content>
+	<ion-card *ngFor="let movie of movies">
 		
 		<ion-item>
 			<ion-avatar item-start>
-				<img [src]="feed.avatar">
+				<img [src]="'https://image.tmdb.org/t/p/w300/' + movie.poster_path">
 			</ion-avatar>
-			<h2 class="feed-title">{{ feed.title }}</h2>
-			<p>{{ feed.date }}</p>
+			<h2 class="feed-title">{{ movie.title }}</h2>
+			<p>{{ movie.release_date | date: 'dd/MM/yyyy'}}</p>
 		</ion-item>
 		
-		<img [src]="feed.banner">
+		<img [src]="'https://image.tmdb.org/t/p/w300/' + movie.backdrop_path">
 		
 		<ion-card-content>
-			<p>{{ feed.description }}</p>
+			<p>{{ movie.overview }}</p>
 		</ion-card-content>
 		
 		<ion-row>
 			<ion-col>
 				<button ion-button icon-start clear small>
 					<ion-icon name="thumbs-up"></ion-icon>
-					<div>{{feed.likes}} Likes</div>
+					<div>{{movie.vote_count}} Likes</div>
 				</button>
 			</ion-col>
 			<ion-col>
 				<button ion-button icon-start clear small>
-					<ion-icon name="text"></ion-icon>
-					<div>{{feed.comments}} Comments</div>
+					<ion-icon name="trophy"></ion-icon>
+					<div>{{movie.vote_average}} Média</div>
 				</button>
 			</ion-col>
 			<ion-col center text-center>
