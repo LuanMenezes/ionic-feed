@@ -1,12 +1,20 @@
 <ion-header>
 	
 	<ion-navbar>
+		<button ion-button icon-only menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
 		<ion-title>Feed</ion-title>
 	</ion-navbar>
 
 </ion-header>
 
 <ion-content>
+	
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+	
 	<ion-card *ngFor="let movie of movies">
 		
 		<ion-item>
