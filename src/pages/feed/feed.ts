@@ -22,10 +22,4 @@ export class FeedPage {
 	private addLikes(){
 		this.likes ++;
 	}
-	
-	private soma(numA: number, numB: number):number{
-		let soma = numA + numB;
-		alert("Resultado: "+ soma);
-		return soma;
-	}
 }
