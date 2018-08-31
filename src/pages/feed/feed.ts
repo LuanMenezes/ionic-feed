@@ -7,19 +7,20 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 	templateUrl: 'feed.html',
 })
 export class FeedPage {
-	private nomeUsuario: string;
-	private likes: number;
+	private feed: object = {
+		title: "Luan Menezes",
+		date: "5 de Novembro",
+		description: "Descrição do Feed",
+		likes: 12,
+		comments: 5,
+		avatar: "assets/imgs/avatar.png",
+		banner: "assets/imgs/bg-card.jpg"
+	};
 	
 	constructor(public navCtrl: NavController, public navParams: NavParams) {
-		this.nomeUsuario = "Luan Menezes";
-		this.likes = 0;
 	}
 	
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad FeedPage');
-	}
-	
-	private addLikes(){
-		this.likes ++;
 	}
 }
